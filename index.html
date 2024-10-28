@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>حساب السعر بعد العمولة</title>
+    <style>
+        body {
+            direction: rtl;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        label, input, button {
+            font-size: 1.2em;
+            margin: 5px 0;
+        }
+        input, button {
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>حاسبة السعر لتعويض العمولة</h1>
+
+    <label for="originalPrice">السعر الأصلي (جنيه):</label><br>
+    <input type="number" id="originalPrice" placeholder="أدخل السعر الأصلي"><br><br>
+
+    <label for="commissionRate">نسبة العمولة (%):</label><br>
+    <input type="number" id="commissionRate" value="30"><br><br>
+
+    <button onclick="calculateNewPrice()">احسب السعر الجديد</button>
+
+    <h2 id="result"></h2>
+
+    <script>
+        function calculateNewPrice() {
+            var originalPrice = parseFloat(document.getElementById('originalPrice').value);
+            var commissionRate = parseFloat(document.getElementById('commissionRate').value) / 100;
+
+            if (isNaN(originalPrice) || isNaN(commissionRate)) {
+                document.getElementById('result').innerText = "يرجى إدخال قيم صحيحة.";
+                return;
+            }
+
+            var newPrice = originalPrice / (1 - commissionRate);
+            newPrice = newPrice.toFixed(2);
+
+            document.getElementById('result').innerText = "السعر الجديد يجب أن يكون: " + newPrice + " جنيه";
+        }
+    </script>
+
+</body>
+</html>
